@@ -1,0 +1,23 @@
+# XDG
+typeset -gx XDG_CONFIG_HOME="${HOME}/.config"
+typeset -gx XDG_DATA_HOME="${HOME}/.local/share"
+typeset -gx XDG_CACHE_HOME="${HOME}/.cache"
+typeset -gx XDG_STATE_HOME="${HOME}/.local/state"
+
+# ZSH
+typeset -gx ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+# Rust
+typeset -gx CARGO_HOME="${XDG_DATA_HOME}/cargo"
+typeset -gx RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+
+# GNUPG
+typeset -gx GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+
+# PATH
+typeset -U path=(
+  ${HOME}/.local/bin
+  ${CARGO_HOME}/bin
+  $path
+)
+typeset -gx PATH

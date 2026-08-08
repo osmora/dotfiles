@@ -1,0 +1,56 @@
+# GENERAL
+typeset COREFILE="${ZDOTDIR}/core.zsh"
+[[ -f "$COREFILE" ]] && source "$COREFILE"
+
+typeset ZCACHE="${XDG_CACHE_HOME}/zsh"
+
+# TAB AUTOCOMPLETION
+autoload -Uz compinit
+compinit -d "${ZCACHE}/.zcompdump"
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${ZCACHE}/.zcompcache"
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' menu select
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*:approximate:*' max-errors 2
+
+# HISTORY
+HISTFILE="${XDG_STATE_HOME}/.histfile"
+HISTSIZE=30000
+SAVEHIST=30000
+HISTORY_IGNORE="(exit|e|clear|c|ll|l|cd|z)"
+
+# OPTIONS
+setopt AUTO_CD
+setopt MENU_COMPLETE
+setopt COMPLETE_IN_WORD
+setopt APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS HIST_SAVE_NO_DUPS HIST_FIND_NO_DUPS
+
+# KEY BINDINGS
+bindkey -e
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# EXTERNAL APPS
+has -q fzf 	    && eval "$(fzf --zsh)"
+has -q zoxide 	&& eval "$(zoxide init zsh)"
+has -q starship && eval "$(starship init --print-full-init zsh)"
+
+# EXTRA
+for f in "${ZDOTDIR}"/*.zsh; do
+    [[ -f "$f" ]] && [[ "$f" != "$COREFILE" ]] && source "$f"
+done
+
+# PLUGINS
+plugins=(
+    /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+)
+for p in "${plugins[@]}"; do
+    [[ -f "$p" ]] && source "$p"
+done

@@ -1,0 +1,17 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/noctalia.toml"
+]
+
+[window]
+decorations = "None"
+
+[font]
+normal = { family = "BlexMono Nerd Font Mono", style = "Regular" }
+bold = { style = "Bold" }
+italic = { style = "Italic" }
+bold_italic = { style = "Bold Italic" }
+size = 12.0
+
+[cursor]
+style = { shape = "Beam" }

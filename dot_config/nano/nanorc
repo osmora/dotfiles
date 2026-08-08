@@ -1,0 +1,17 @@
+set autoindent
+set linenumbers
+set minibar
+set locking
+set nohelp
+set tabsize 4
+set tabstospaces
+set trimblanks
+
+set errorcolor     bold,red,lightblack
+set minicolor      green,lightblack
+set numbercolor    green,lightblack
+set promptcolor    yellow,lightblack
+set selectedcolor  lightcyan,lightblack
+set spotlightcolor white,lightblack
+
+include /usr/share/nano-syntax-highlighting/*.nanorc # require nano-syntax-highlighting pkg `pacman -S nano-syntax-highlighting`
